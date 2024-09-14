@@ -11,6 +11,8 @@ Namecall = hookmetamethod(game, "__namecall", function(self, ...)
    return Namecall(self, ...)
 end)
 --thông báo
+local StarterGui = game:GetService("StarterGui")
+
 StarterGui:SetCore("SendNotification", {
     Title = "script make by OMOScripts",
     Text = "Screengui me by me",
@@ -19,7 +21,7 @@ StarterGui:SetCore("SendNotification", {
 
 StarterGui:SetCore("SendNotification", {
     Title = "crack by omo script cracks",
-    Text = "💀💀💀",
+    Text = "I just took other people's scripts to create ScreenGui",
     Duration = 5
 })
 
