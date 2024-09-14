@@ -36,7 +36,7 @@ local LocalPlayer = Players.LocalPlayer
 
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
-local TextBox = Instance.new("enter glove name ")
+local TextBox = Instance.new("TextBox")
 local EquipButton = Instance.new("TextButton")
 
 -- Đặt ScreenGui vào PlayerGui của người chơi
