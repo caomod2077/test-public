@@ -1,0 +1,88 @@
+--bypass--
+local Namecall
+Namecall = hookmetamethod(game, "__namecall", function(self, ...)
+   if getnamecallmethod() == "FireServer" and tostring(self) == "Ban" then
+       return 
+   elseif getnamecallmethod() == "FireServer" and tostring(self) == "WalkSpeedChanged" then
+       return 
+   elseif getnamecallmethod() == "FireServer" and tostring(self) == "AdminGUI" then
+       return 
+   end
+   return Namecall(self, ...)
+end)
+--thông báo
+StarterGui:SetCore("SendNotification", {
+    Title = "script make by OMOScripts",
+    Text = "Screengui me by me",
+    Duration = 5
+})
+
+StarterGui:SetCore("SendNotification", {
+    Title = "crack by omo script cracks",
+    Text = "💀💀💀",
+    Duration = 5
+})
+
+StarterGui:SetCore("SendNotification", {
+    Title = "Bypass Complete",
+    Text = "Successfully bypass",
+    Duration = 5
+})
+--screengui
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextBox = Instance.new("enter glove name ")
+local EquipButton = Instance.new("TextButton")
+
+-- Đặt ScreenGui vào PlayerGui của người chơi
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+-- Tạo giao diện Frame
+Frame.Parent = ScreenGui
+Frame.Size = UDim2.new(0.12, 0, 0.12, 0)
+Frame.Position = UDim2.new(0.5, -Frame.Size.X.Offset / 2, 0.5, -Frame.Size.Y.Offset / 2)
+Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Frame.BackgroundTransparency = 0
+Frame.Active = true
+Frame.Draggable = true
+
+-- Tạo TextBox để nhập tên găng tay
+TextBox.Parent = Frame
+TextBox.Size = UDim2.new(0.8, 0, 0.3, 0)
+TextBox.Position = UDim2.new(0.1, 0, 0.1, 0)
+TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.PlaceholderText = "Name Glove"
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+-- Tạo nút Equip
+EquipButton.Parent = Frame
+EquipButton.Size = UDim2.new(0.8, 0, 0.3, 0)
+EquipButton.Position = UDim2.new(0.1, 0, 0.6, 0)
+EquipButton.BackgroundColor3 = Color3.fromRGB(0, 128, 0)
+EquipButton.Text = "Equip"
+EquipButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+EquipButton.Font = Enum.Font.Cartoon
+EquipButton.TextSize = 16
+
+-- Hàm xử lý khi nhấn nút Equip
+EquipButton.MouseButton1Click:Connect(function()
+    -- Lấy tên găng tay từ TextBox
+    local gloveName = TextBox.Text
+
+    -- Kiểm tra nếu người chơi đã nhập tên găng tay
+    if gloveName and gloveName ~= "" then
+        -- Lặp qua các RemoteEvent trong ReplicatedStorage và gửi tên găng tay
+        for i, v in pairs(game.ReplicatedStorage._NETWORK:GetChildren()) do
+            if v.ClassName == "RemoteEvent" then
+                v:FireServer(gloveName) -- Gửi tên găng tay từ TextBox
+            end
+        end
+    else
+        -- Cảnh báo nếu chưa nhập tên
+        warn("Vui lòng nhập tên găng tay!")
+    end
+end)
