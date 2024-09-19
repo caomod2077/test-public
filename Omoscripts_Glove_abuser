@@ -7,7 +7,7 @@ end
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/notificationtest"))();
 local Notify = Notification.Notify;
 EnableCreditScript = true
-loadstring(game:HttpGet("https://raw.githubusercontent.com/OMOHOTA/GeneralSB/main/Credit_owner.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/caomod/refs/heads/main/Credit%3F?token=GHSAT0AAAAAACXR2QZWMFF73J266TUF6CCYZXL276Q"))()
 Notify({Description = "Made by " .. getgenv().CreditName.DisplayYoutube .. "/" .. getgenv().CreditName.SourceYoutube ; Title = "Script Credit!"; Duration = 5;});
 EnableCreditScript = false
 
