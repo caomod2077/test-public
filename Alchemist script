@@ -1,3 +1,11 @@
+local CoreGui = game:GetService("StarterGui")
+
+CoreGui:SetCore("SendNotification", {
+    Title = "Script is under testing ",
+    Text = "i dont know how you found this script lol", 
+    Duration = 5, 
+})
+
 
 
 local screenGui = Instance.new("ScreenGui")
