@@ -1,0 +1,72 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TitleLabel = Instance.new("TextLabel")
+local TextBox = Instance.new("TextBox")
+local ToggleButton = Instance.new("TextButton")
+
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+Frame.Parent = ScreenGui
+Frame.Size = UDim2.new(0.25, 0, 0.25, 0)
+Frame.Position = UDim2.new(0.5, -Frame.Size.X.Offset / 2, 0.5, -Frame.Size.Y.Offset / 2)
+Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Frame.BackgroundTransparency = 0
+Frame.Active = true
+Frame.Draggable = true
+
+TitleLabel.Parent = Frame
+TitleLabel.Size = UDim2.new(1, 0, 0.15, 0)
+TitleLabel.Position = UDim2.new(0, 0, 0, 0)
+TitleLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TitleLabel.Text = "ghi cc j cũng dc"
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.Font = Enum.Font.Cartoon
+TitleLabel.TextSize = 14
+TitleLabel.TextWrapped = true
+
+TextBox.Parent = Frame
+TextBox.Size = UDim2.new(0.8, 0, 0.3, 0)
+TextBox.Position = UDim2.new(0.1, 0, 0.25, 0)
+TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.PlaceholderText = "Name"
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+ToggleButton.Parent = Frame
+ToggleButton.Size = UDim2.new(0.6, 0, 0.25, 0)
+ToggleButton.Position = UDim2.new(0.2, 0, 0.65, 0)
+ToggleButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ToggleButton.Text = "Off"
+ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.Font = Enum.Font.Cartoon
+ToggleButton.TextSize = 16
+
+local isToggled = false
+
+ToggleButton.MouseButton1Click:Connect(function()
+    isToggled = not isToggled
+    if isToggled then
+        ToggleButton.Text = "On"
+    else
+        ToggleButton.Text = "Off"
+    end
+end)
+
+local function updateRainbow()
+    local hue = 0
+    local speed = 0.01
+    while true do
+        local color = Color3.fromHSV(hue, 1, 1)
+        TitleLabel.TextColor3 = color
+        TextBox.TextColor3 = color
+        ToggleButton.TextColor3 = color
+        Frame.BackgroundColor3 = color
+        hue = (hue + speed) % 1
+        wait(0.05)
+    end
+end
+
+coroutine.wrap(updateRainbow)()
