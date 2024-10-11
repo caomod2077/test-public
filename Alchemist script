@@ -1,20 +1,20 @@
 
--- Create the ScreenGui
+
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "PotionGui"
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 screenGui.ResetOnSpawn = false
 
--- Create the Frame for the GUI (rộng hơn và hình chữ nhật)
+
 local potionFrame = Instance.new("Frame")
-potionFrame.Size = UDim2.new(0, 700, 0, 350)  -- Tăng chiều rộng của khung
-potionFrame.Position = UDim2.new(0.5, -350, 0.5, -175)  -- Center of the screen
+potionFrame.Size = UDim2.new(0, 700, 0, 350) 
+potionFrame.Position = UDim2.new(0.5, -350, 0.5, -175)
 potionFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 potionFrame.BackgroundTransparency = 0.5
 potionFrame.BorderSizePixel = 0
 potionFrame.Parent = screenGui
 
--- Create Label
+
 local label = Instance.new("TextLabel")
 label.Size = UDim2.new(1, 0, 0, 50)
 label.Position = UDim2.new(0, 0, 0, 0)
@@ -23,16 +23,16 @@ label.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
 label.TextColor3 = Color3.fromRGB(255, 255, 255)
 label.Parent = potionFrame
 
--- Create InputBox for quantity (nằm góc trái)
+
 local quantityInput = Instance.new("TextBox")
 quantityInput.Size = UDim2.new(0, 100, 0, 50)
-quantityInput.Position = UDim2.new(0, 10, 0, 0)  -- Đặt ở góc bên trái
+quantityInput.Position = UDim2.new(0, 10, 0, 0) 
 quantityInput.PlaceholderText = "number"
 quantityInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 quantityInput.TextColor3 = Color3.fromRGB(0, 0, 0)
 quantityInput.Parent = potionFrame
 
--- Function to brew a single potion
+
 local function brewPotion(potionName, ingredients, quantity)
     for _ = 1, quantity do
         for _, ingredient in ipairs(ingredients) do
@@ -47,11 +47,11 @@ local function brewPotion(potionName, ingredients, quantity)
             [1] = "BrewPotion"
         }
         game:GetService("ReplicatedStorage").AlchemistEvent:FireServer(unpack(brewArgs))
-        wait(0.1)  -- Adjust the wait time as needed
+        wait(0.1) 
     end
 end
 
--- Recipes for potions
+-- danh sách chế thuốc
 local recipes = {
     ["Explosion Potion"] = {"Fire Flower", "Fire Flower", "Red Crystal"},
     ["Nightmare Potion"] = {"Dark Root", "Dark Root", "Dark Root"},
@@ -72,13 +72,13 @@ local recipes = {
     ["Corrupted Field Potion"] = {"Plane Flower", "Plane Flower", "Hazel Lily"}
 }
 
--- Create Buttons for Each Potion
-local buttonSpacing = 10  -- Tăng khoảng cách giữa các nút
-local buttonWidth = 100  -- Kích thước nút nhỏ hơn
+
+local buttonSpacing = 10 
+local buttonWidth = 100  
 local buttonHeight = 40
-local positionY = 60  -- Điều chỉnh vị trí ban đầu của các nút
-local maxPerRow = 5  -- Để chứa 5 nút mỗi hàng
-local column = 0  -- Biến theo dõi vị trí cột
+local positionY = 60 
+local maxPerRow = 5
+local column = 0 
 
 for potionName, ingredients in pairs(recipes) do
     local button = Instance.new("TextButton")
@@ -94,38 +94,35 @@ for potionName, ingredients in pairs(recipes) do
         brewPotion(potionName, ingredients, quantity)
     end)
 
-    -- Di chuyển cột và hàng
+    
     column = column + 1
     if column >= maxPerRow then
-        column = 0  -- Quay về cột đầu tiên
-        positionY = positionY + buttonHeight + buttonSpacing  -- Xuống dòng tiếp theo
+        column = 0 
+        positionY = positionY + buttonHeight + buttonSpacing  
     end
 end
 
--- Create the "Alchemist" button
+
 local alchemistButton = Instance.new("TextButton")
 alchemistButton.Size = UDim2.new(0, 200, 0, 50)
-alchemistButton.Position = UDim2.new(0.5, -250, 1, -70)  -- Nằm dưới các nút potion
+alchemistButton.Position = UDim2.new(0.5, -250, 1, -70)  
 alchemistButton.Text = "Alchemist"
 alchemistButton.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
 alchemistButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 alchemistButton.Parent = potionFrame
 
--- Add functionality to Alchemist button
 alchemistButton.MouseButton1Click:Connect(function()
     game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
 end)
 
--- Create the "Get All Item" button
 local getAllItemButton = Instance.new("TextButton")
 getAllItemButton.Size = UDim2.new(0, 200, 0, 50)
-getAllItemButton.Position = UDim2.new(0.5, 50, 1, -70)  -- Nằm bên cạnh nút Alchemist
+getAllItemButton.Position = UDim2.new(0.5, 50, 1, -70) 
 getAllItemButton.Text = "Get All Item"
 getAllItemButton.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
 getAllItemButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 getAllItemButton.Parent = potionFrame
 
--- List of all ingredients
 local ingredientsList = {
     "Blue Crystal", "Dire Flower", "Dark Root", "Autumn Sprout", "Blood Rose",
     "Elder Wood", "Fire Flower", "Glowing Mushroom", "Hazel Lily", "Jade Stone",
@@ -133,7 +130,7 @@ local ingredientsList = {
     "Winter Rose"
 }
 
--- Function to get all items (add 10 of each item to the inventory)
+
 local function getAllItems()
     for _, ingredient in ipairs(ingredientsList) do
         for i = 1, 10 do
@@ -147,21 +144,18 @@ local function getAllItems()
     end
 end
 
--- Add functionality to Get All Item button
 getAllItemButton.MouseButton1Click:Connect(function()
     getAllItems()
 end)
 
--- Create the "X" button to close the GUI
 local closeButton = Instance.new("TextButton")
 closeButton.Size = UDim2.new(0, 50, 0, 50)
-closeButton.Position = UDim2.new(1, -60, 0, 0)  -- Góc trên bên phải của ScreenGui
+closeButton.Position = UDim2.new(1, -60, 0, 0)  
 closeButton.Text = "X"
 closeButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
 closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 closeButton.Parent = potionFrame
 
--- Add functionality to close the GUI when "X" is clicked
 closeButton.MouseButton1Click:Connect(function()
     screenGui:Destroy()
 end)
