@@ -1,0 +1,34 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Hàm phản công
+local function counterAttack()
+    game:GetService("ReplicatedStorage").Counter:FireServer()
+    print("Phản công đã được kích hoạt!")
+end
+
+-- Kiểm tra va chạm với hitbox găng tay
+local function onHit(hitPart)
+    -- Kiểm tra xem phần va chạm có chứa hitbox của găng tay
+    if hitPart.Parent and hitPart.Parent:FindFirstChild("Hitbox") then
+        counterAttack()  -- Kích hoạt phản công khi va chạm với hitbox của găng tay
+    end
+end
+
+-- Kết nối sự kiện khi nhân vật được tạo lại
+local function onCharacterAdded(newCharacter)
+    character = newCharacter
+    
+    -- Lắng nghe va chạm với bất kỳ phần cơ thể nào của nhân vật
+    for _, part in pairs(character:GetChildren()) do
+        if part:IsA("BasePart") then
+            part.Touched:Connect(onHit)  -- Kết nối sự kiện va chạm
+        end
+    end
+end
+
+-- Kết nối khi nhân vật được tạo lần đầu
+onCharacterAdded(character)
+
+-- Theo dõi khi nhân vật bị reset hoặc thay đổi
+player.CharacterAdded:Connect(onCharacterAdded)
