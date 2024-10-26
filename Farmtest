@@ -1,0 +1,20 @@
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(18829.7109, 3042.24097, -228.608887, 0.14886488, 0, -0.988857627, -0, 1.00000012, -0, 0.988857627, 0, 0.14886488)
+
+fireclickdetector(game.Workspace.Lobby["el gato"].ClickDetector)
+
+game:GetService("ReplicatedStorage").Events.Cat:FireServer()
+
+wait(0,7)
+
+game:GetService("ReplicatedStorage").GeneralAbility:FireServer()
+
+wait(2)
+
+fireclickdetector(game.Workspace.Lobby["Replica"].ClickDetector)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Lobby.Teleport2.CFrame
+
+wait(1,5)
+
+game:GetService("ReplicatedStorage").Duplicate:FireServer()
