@@ -1,13 +1,15 @@
 
 local function SpamReplica()
-    while true do
+    for i = 1, 100 do -- Lặp lại 100 lần
         for _, v in pairs(workspace:GetChildren()) do
             if v.Name:match(game.Players.LocalPlayer.Name) and v:FindFirstChild("HumanoidRootPart") then
                 game.ReplicatedStorage.b:FireServer(v:WaitForChild("HumanoidRootPart"), true)
             end
         end
-        task.wait()
     end
 end
 
-SpamReplica()
+while true do
+    SpamReplica() -- Chạy 100 lần
+    task.wait() -- Chờ 1 giây trước khi lặp lại
+end
