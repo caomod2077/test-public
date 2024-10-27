@@ -1,5 +1,5 @@
 coroutine.wrap(function()
     for i = 1, 1000 do
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/test-public/refs/heads/main/TestInstant"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/test-public/refs/heads/main/Test2"))()
     end
 end)()
